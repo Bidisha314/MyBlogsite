@@ -1,0 +1,38 @@
+---
+layout: base.njk
+title: Categories - KnowledgeoPedia
+activeNav: categories
+permalink: /categories/
+---
+
+<section class="page-banner">
+
+<h1>Explore All Categories</h1>
+
+<p>Every topic we write about, in one place. Pick one to see the articles inside it.</p>
+
+</section>
+
+<div class="search">
+
+<input type="text" placeholder="Search categories...">
+
+</div>
+
+<section class="categories-section" style="padding-top:10px;">
+
+<div class="categories">
+{% for cat in categories %}
+<a href="/categories/{{ cat.slug }}/" class="cat-card">
+<div class="cat-icon" style="background:{{ cat.bg }};">
+<svg viewBox="0 0 24 24" fill="none" stroke="{{ cat.color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{{ cat.icon | safe }}</svg>
+</div>
+<div class="cat-info">
+<h3>{{ cat.name }}</h3>
+<p>{{ collections.postsByCategory[cat.slug] | length }} articles</p>
+</div>
+</a>
+{% endfor %}
+</div>
+
+</section>

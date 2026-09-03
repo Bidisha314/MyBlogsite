@@ -1,0 +1,56 @@
+---
+layout: base.njk
+pagination:
+  data: categories
+  size: 1
+  alias: cat
+permalink: "/categories/{{ cat.slug }}/"
+eleventyComputed:
+  title: "{{ cat.name }} Articles - KnowledgeoPedia"
+  activeNav: categories
+  activeCategory: "{{ cat.slug }}"
+---
+
+<div class="breadcrumb">
+<a href="/">Home</a> / <a href="/categories/">Categories</a> / <span>{{ cat.name }}</span>
+</div>
+
+<section class="cat-banner">
+
+<div class="cat-banner-icon" style="background:{{ cat.bg }};">
+<svg viewBox="0 0 24 24" fill="none" stroke="{{ cat.color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{{ cat.icon | safe }}</svg>
+</div>
+
+<h1>{{ cat.name }}</h1>
+
+<p>Browsing {{ collections.postsByCategory[cat.slug] | length }} articles in {{ cat.name }}.</p>
+
+</section>
+
+{% set catPosts = collections.postsByCategory[cat.slug] %}
+
+{% if catPosts and catPosts.length > 0 %}
+<section class="blogs">
+{% for post in catPosts %}
+<a href="{{ post.url }}" class="card">
+
+<img src="{{ post.data.image }}">
+
+<div class="content">
+
+<span class="tag">{{ cat.name }}</span>
+
+<h3>{{ post.data.title }}</h3>
+
+<p>{{ post.data.excerpt }}</p>
+
+<span class="read">Read More →</span>
+
+</div>
+
+</a>
+{% endfor %}
+</section>
+{% else %}
+<div class="empty-state">No articles in this category yet. Check back soon!</div>
+{% endif %}

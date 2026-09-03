@@ -1,0 +1,69 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# This makes Netlify Identity handle logins for /admin
+site_url: https://your-site-name.netlify.app
+display_url: https://your-site-name.netlify.app
+logo_url: /assets/img/logo.png
+
+media_folder: "src/assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "src/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    identifier_field: title
+    summary: "{{title}} — {{category}}"
+    sortable_fields: ["date", "title", "category"]
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "yyyy-MM-dd" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Tech", value: "tech" }
+          - { label: "Finance", value: "finance" }
+          - { label: "Education", value: "education" }
+          - { label: "Lifestyle", value: "lifestyle" }
+          - { label: "AI Tools", value: "ai-tools" }
+          - { label: "Health", value: "health" }
+          - { label: "Travel", value: "travel" }
+          - { label: "Trending", value: "trending" }
+          - { label: "Marketing", value: "marketing" }
+      - label: "Author"
+        name: "author"
+        widget: "select"
+        default: "ashok"
+        options:
+          - { label: "Ashok Jagarapu", value: "ashok" }
+          - { label: "Guest Author", value: "guest" }
+      - { label: "Cover Image", name: "image", widget: "image" }
+      - { label: "Short Excerpt", name: "excerpt", widget: "text", hint: "Shown on cards and listing pages. Keep it to 1-2 sentences." }
+      - { label: "Embedded Video URL", name: "videoUrl", widget: "string", required: false, hint: "Paste a YouTube/Vimeo embed URL, e.g. https://www.youtube.com/embed/VIDEO_ID" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Draft (hide from live site)", name: "draft", widget: "boolean", default: false, required: false }
+
+  - name: "authors"
+    label: "Author Profiles"
+    files:
+      - name: "authors"
+        label: "All Authors"
+        file: "src/_data/authors.json"
+        fields:
+          - name: "authors"
+            label: "Authors"
+            widget: "list"
+            fields:
+              - { label: "Slug (no spaces)", name: "slug", widget: "string" }
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Bio", name: "bio", widget: "text" }
+              - { label: "Avatar", name: "avatar", widget: "image" }

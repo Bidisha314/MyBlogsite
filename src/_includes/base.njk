@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title or "KnowledgeoPedia" }}</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+
+<header>
+
+<a href="/" class="logo">KnowledgeoPedia</a>
+
+<nav>
+
+<a href="/">Home</a>
+
+<a href="/#blogs">Blogs</a>
+
+<div class="nav-dropdown">
+
+<a href="/categories/" class="dropdown-trigger{% if activeNav == 'categories' %} active{% endif %}">
+Categories
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</a>
+
+<div class="mega-menu">
+{% for cat in categories %}
+<a href="/categories/{{ cat.slug }}/" class="mega-item{% if activeCategory == cat.slug %} active-cat{% endif %}">
+<span class="mega-icon" style="background:{{ cat.bg }};">
+<svg viewBox="0 0 24 24" fill="none" stroke="{{ cat.color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{{ cat.icon | safe }}</svg>
+</span>
+{{ cat.name }}
+</a>
+{% endfor %}
+</div>
+
+</div>
+
+<a href="#">About</a>
+
+<a href="#">Contact</a>
+
+</nav>
+
+</header>
+
+{{ content | safe }}
+
+<footer>
+
+© {{ currentYear }} KnowledgeoPedia. All Rights Reserved.
+
+</footer>
+
+<script>
+document.querySelectorAll('.nav-dropdown').forEach(function(dd){
+var trigger = dd.querySelector('.dropdown-trigger');
+trigger.addEventListener('click', function(e){
+if(window.matchMedia('(hover: none)').matches){
+e.preventDefault();
+dd.classList.toggle('open');
+}
+});
+});
+document.addEventListener('click', function(e){
+document.querySelectorAll('.nav-dropdown.open').forEach(function(dd){
+if(!dd.contains(e.target)) dd.classList.remove('open');
+});
+});
+</script>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", function (user) {
+    if (!user) {
+      window.netlifyIdentity.on("login", function () {
+        document.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
+
+</body>
+</html>

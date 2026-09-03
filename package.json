@@ -1,0 +1,16 @@
+{
+  "name": "knowledgeopedia",
+  "version": "1.0.0",
+  "description": "KnowledgeoPedia blog - built with Eleventy and Decap CMS",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  }
+}

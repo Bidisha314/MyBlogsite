@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "ashok",
+    "name": "Ashok Jagarapu",
+    "bio": "Founder & editor at KnowledgeoPedia. Writes about tech, AI tools, and everything in between.",
+    "avatar": "/assets/img/authors/ashok.jpg"
+  },
+  {
+    "slug": "guest",
+    "name": "Guest Author",
+    "bio": "A guest contributor sharing their expertise with the KnowledgeoPedia community.",
+    "avatar": "/assets/img/authors/guest.jpg"
+  }
+]
